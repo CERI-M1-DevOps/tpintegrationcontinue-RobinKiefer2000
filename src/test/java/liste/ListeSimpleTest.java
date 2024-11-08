@@ -63,6 +63,14 @@ public class ListeSimpleTest {
     }
 
     @Test
+    public void modifiePremierElementNotFound() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        listeATester.modifiePremier(3, 4);
+        assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+    }
+
+    @Test
     public void modifieTous() {
         listeATester.ajout(1);
         listeATester.ajout(2);
@@ -79,6 +87,22 @@ public class ListeSimpleTest {
         assertNull(listeATester.tete);
         assertEquals(0, listeATester.getSize());
     }
+
+    @Test
+    public void supprimePremierElementNotFound() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        listeATester.supprimePremier(3);
+        assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+    }
+
+    @Test
+    public void supprimePremierSingleElementNotMatching() {
+        listeATester.ajout(1);
+        listeATester.supprimePremier(2);
+        assertEquals("ListeSimple(Noeud(1))", listeATester.toString());
+    }
+
 
     @Test
     public void supprimePremierEnPremierePosition() {
@@ -212,6 +236,8 @@ public class ListeSimpleTest {
         assertEquals(listeATester.toString(), "ListeSimple(Noeud(1), Noeud(2), Noeud(3))");
     }
 
+
+
     @Test
     public void echanger2NoeudsQuelconques() {
         listeATester.ajout(5);
@@ -225,6 +251,7 @@ public class ListeSimpleTest {
         listeATester.echanger(r1, r2);
         assertEquals(listeATester.toString(), "ListeSimple(Noeud(1), Noeud(4), Noeud(3), Noeud(2), Noeud(5))");
     }
+
 
     @Test
     public void echangerLePremierNoeudAvecUnAutre() {
@@ -257,10 +284,14 @@ public class ListeSimpleTest {
     }
 
     @Test
-    public void testAuPif1(){
-        listeATester.ajout(1);
+    public void echangerLeMemeNoeud(){
+        listeATester.ajout(5);
+        listeATester.ajout(4);
+        Noeud r1 = listeATester.tete;
+        listeATester.ajout(3);
         listeATester.ajout(2);
-        listeATester.modifiePremier(3,4);
-        assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+        listeATester.ajout(1);
+        listeATester.echanger(r1, r1);
+        assertEquals(listeATester.toString(), "ListeSimple(Noeud(1), Noeud(2), Noeud(3), Noeud(4), Noeud(5))");
     }
 }
